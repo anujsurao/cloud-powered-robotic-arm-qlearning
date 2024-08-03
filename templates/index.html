@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Robotic Arm Q-Learning</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Robotic Arm Q-Learning</h1>
+    <form id="train-form">
+        <label for="episodes">Episodes:</label>
+        <input type="number" id="episodes" name="episodes" value="1000">
+        <label for="max_steps">Max Steps per Episode:</label>
+        <input type="number" id="max_steps" name="max_steps" value="50">
+        <button type="submit">Start Training</button>
+    </form>
+    <div id="message"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('#train-form').on('submit', function(e) {
+            e.preventDefault();
+            $.post('/train', $(this).serialize(), function(data) {
+                $('#message').text(data.message);
+            });
+        });
+    </script>
+</body>
+</html>
